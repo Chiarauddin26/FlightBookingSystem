@@ -29,6 +29,4 @@ public class Booking implements Serializable {
     @Column(length = 30)
     private String passengerName;
 
-
-
 }
