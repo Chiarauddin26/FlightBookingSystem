@@ -8,16 +8,19 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "booking")
+@Table(name = "flight")
 @Setter
 @Getter
 @NoArgsConstructor
-public class Booking implements Serializable {
+public class Flight implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(length = 10)
+    private String flightNumber;
     private LocalDate flightDate;
     private LocalDateTime departureTime;
     private LocalDateTime landingTime;
@@ -25,13 +28,9 @@ public class Booking implements Serializable {
     private String originAirport;
     @Column(length = 100)
     private String destinationAirport;
-    private short seats;
-    @Column(length = 30)
-    private String passengerName;
+    private short totalSeats;
 
-    @ManyToOne
-    @JoinColumn(name = "flight_id")
-    private Flight flight;
-
+    @OneToMany(mappedBy = "flight")
+    private List<Booking> bookings;
 
 }
